@@ -1,0 +1,6 @@
+---
+ansible_host: 192.168.0.99
+ansible_user: root
+# High availability settings
+keepalived_role: MASTER
+keepalived_priority: 255

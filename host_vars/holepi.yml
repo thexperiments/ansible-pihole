@@ -1,0 +1,6 @@
+---
+ansible_host: 192.168.0.98
+ansible_user: root
+# High availability settings
+keepalived_role: SLAVE
+keepalived_priority: 254

@@ -1,0 +1,16 @@
+# Settings for all hosts in pieholes group
+pihole_password: PleaseChangeThisPassword 
+pihole_dns1: '1.1.1.1'
+pihole_dns2: '8.8.8.8'
+pihole_dns3: ''
+pihole_dns4: ''
+# settings for pihole to forward local requests to router
+pihole_rev_server_enable: 'true'
+pihole_rev_server_network: 192.168.0.1/24
+pihole_rev_server_router_ip: '192.168.0.1'
+pihole_rev_server_domain: 'lab'
+# high availability
+keepalived_enabled: true
+keepalived_virtual_ip: 192.168.0.2/24
+keepalived_virtual_router_id: 42
+keepalived_auth_pass: SuperSecret

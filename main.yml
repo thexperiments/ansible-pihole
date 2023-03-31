@@ -1,0 +1,21 @@
+---
+- name: Configure Pi-holes
+  hosts: piholes
+  become: true
+
+  pre_tasks:
+    - name: Ensure apt cache is up to date.
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+      when:
+        - ansible_facts.os_family == "Debian"
+
+  tasks:
+    - name: Setup Pi-hole
+      ansible.builtin.import_tasks: tasks/pi-hole.yml
+    
+    - name: Setup high availability
+      ansible.builtin.import_tasks: tasks/keepalived.yml
+      when:
+        - keepalived_enabled

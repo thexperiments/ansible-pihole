@@ -1,0 +1,25 @@
+---
+- name: Ensure required packages are installed
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+    name: curl
+    state: present
+  when:
+    - ansible_facts.os_family == "Debian"
+- name: Create Pi-hole configuration directory
+  ansible.builtin.file:
+    name: /etc/pihole/
+    state: directory
+    mode: 0775
+
+- name: Copy Pi-hole setupVars template to host
+  ansible.builtin.template:
+    src: templates/setupVars.conf.j2
+    dest: "/etc/pihole/setupVars.conf"
+    mode: '0644'
+  become: true
+
+- name: Install Pi-hole directly from website in unattended mode
+  ansible.builtin.shell: curl -L https://install.pi-hole.net | bash /dev/stdin --unattended
+
